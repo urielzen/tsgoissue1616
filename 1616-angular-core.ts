@@ -1,4 +1,3 @@
-
 interface AbstractType<T> extends Function {
   prototype: T;
 }
@@ -15,25 +14,19 @@ declare abstract class ComponentRef$1<C> {
 }
 
 declare abstract class ComponentFactory$1<C> {
-
   abstract get selector(): string;
-
   abstract get componentType(): Type$1<any>;
-
   abstract get ngContentSelectors(): string[];
-
   abstract get inputs(): {
     propName: string;
     templateName: string;
     transform?: (value: any) => any;
     isSignal: boolean;
   }[];
-
   abstract get outputs(): {
     propName: string;
     templateName: string;
   }[];
-
   abstract create(
     injector: Injector,
     projectableNodes?: any[][],
@@ -58,94 +51,60 @@ declare class InjectionToken<T> {
 
 type ProviderToken<T> = Type$1<T> | AbstractType<T> | InjectionToken<T>;
 
-// interface InjectOptions {
-//   optional?: boolean;
-//   skipSelf?: boolean;
-//   self?: boolean;
-//   host?: boolean;
-// }
-
-// declare enum InjectFlags {
-//   Default = 0,
-//   Host = 1,
-//   Self = 2,
-//   SkipSelf = 4,
-//   Optional = 8,
-// }
-
 interface ValueSansProvider {
-
   useValue: any;
 }
 
 interface ValueProvider extends ValueSansProvider {
-
   provide: any;
-
   multi?: boolean;
 }
 
 interface ExistingProvider extends ExistingSansProvider {
-
   provide: any;
-
   multi?: boolean;
 }
 
 interface ExistingSansProvider {
-
   useExisting: any;
 }
 
 interface StaticClassSansProvider {
-
   useClass: Type$1<any>;
-
   deps: any[];
 }
 
 interface StaticClassProvider extends StaticClassSansProvider {
-
   provide: any;
-
   multi?: boolean;
 }
 
 interface ConstructorSansProvider {
-
   deps?: any[];
 }
 
 interface ConstructorProvider extends ConstructorSansProvider {
-
   provide: Type$1<any>;
-
   multi?: boolean;
 }
 
 interface TypeProvider extends Type$1<any> {}
 interface ClassSansProvider {
-
   useClass: Type$1<any>;
 }
+
 interface ClassProvider extends ClassSansProvider {
-
   provide: any;
-
   multi?: boolean;
 }
 
 interface FactorySansProvider {
-
   useFactory: Function;
-
   deps?: any[];
 }
 
 interface FactoryProvider extends FactorySansProvider {
-
   provide: any;
-
   multi?: boolean;
 }
 
@@ -170,30 +129,9 @@ declare abstract class Injector {
   static THROW_IF_NOT_FOUND: {};
   static NULL: Injector;
 
-  // abstract get<T>(
-  //   token: ProviderToken<T>,
-  //   notFoundValue: undefined,
-  //   options: InjectOptions & {
-  //     optional?: false;
-  //   }
-  // ): T;
-
-  // abstract get<T>(
-  //   token: ProviderToken<T>,
-  //   notFoundValue: null | undefined,
-  //   options: InjectOptions
-  // ): T | null;
-
-  // abstract get<T>(
-  //   token: ProviderToken<T>,
-  //   notFoundValue?: T,
-  //   options?: InjectOptions | InjectFlags
-  // ): T;
-
   abstract get<T>(
     token: ProviderToken<T>,
     notFoundValue?: T,
-    // flags?: InjectFlags
   ): T;
 
   abstract get(token: any, notFoundValue?: any): any;
@@ -243,37 +181,10 @@ declare abstract class TemplateRef<C> {
 }
 
 declare abstract class EnvironmentInjector implements Injector {
-
-  // abstract get<T>(
-  //   token: ProviderToken<T>,
-  //   notFoundValue: undefined,
-  //   options: InjectOptions & {
-  //     optional?: false;
-  //   }
-  // ): T;
-
-  // abstract get<T>(
-  //   token: ProviderToken<T>,
-  //   notFoundValue: null | undefined,
-  //   options: InjectOptions
-  // ): T | null;
-
-  // abstract get<T>(
-  //   token: ProviderToken<T>,
-  //   notFoundValue?: T,
-  //   options?: InjectOptions
-  // ): T;
-
   abstract get<T>(
     token: ProviderToken<T>,
     notFoundValue?: T,
-    // flags?: InjectFlags
   ): T;
-
-  abstract get(token: any, notFoundValue?: any): any;
-
-  abstract runInContext<ReturnT>(fn: () => ReturnT): ReturnT;
-  abstract destroy(): void;
 }
 
 declare abstract class ComponentFactoryResolver$1 {
@@ -304,56 +215,6 @@ abstract class ViewContainerRef {
   abstract get injector(): Injector;
 
   abstract get parentInjector(): Injector;
-
-  abstract clear(): void;
-
-  abstract get(index: number): ViewRef$1 | null;
-
-  abstract get length(): number;
-
-  abstract createEmbeddedView<C>(
-    templateRef: TemplateRef<C>,
-    context?: C,
-    options?: {
-      index?: number;
-      injector?: Injector;
-    }
-  ): EmbeddedViewRef<C>;
-
-  abstract createEmbeddedView<C>(
-    templateRef: TemplateRef<C>,
-    context?: C,
-    index?: number
-  ): EmbeddedViewRef<C>;
-
-  abstract createComponent<C>(
-    componentType: Type$1<C>,
-    options?: {
-      index?: number;
-      injector?: Injector;
-      ngModuleRef?: NgModuleRef$1<unknown>;
-      environmentInjector?: EnvironmentInjector | NgModuleRef$1<unknown>;
-      projectableNodes?: Node[][];
-    }
-  ): ComponentRef$1<C>;
-
-  abstract createComponent<C>(
-    componentFactory: ComponentFactory$1<C>,
-    index?: number,
-    injector?: Injector,
-    projectableNodes?: any[][],
-    environmentInjector?: EnvironmentInjector | NgModuleRef$1<any>
-  ): ComponentRef$1<C>;
-
-  abstract insert(viewRef: ViewRef$1, index?: number): ViewRef$1;
-
-  abstract move(viewRef: ViewRef$1, currentIndex: number): ViewRef$1;
-
-  abstract indexOf(viewRef: ViewRef$1): number;
-
-  abstract remove(index?: number): void;
-
-  abstract detach(index?: number): ViewRef$1 | null;
 }
 
 declare const Type$1: FunctionConstructor;
@@ -377,19 +238,6 @@ type ɵɵFactoryDeclaration<
   T,
   CtorDependencies extends CtorDependency[]
 > = unknown;
-
-interface ɵɵInjectableDeclaration<T> {
-  providedIn:
-    | InjectorType<any>
-    | 'root'
-    | 'platform'
-    | 'any'
-    | 'environment'
-    | null;
-  token: unknown;
-  factory: (t?: Type$1<any>) => T;
-  value: T | undefined;
-}
 
 interface InjectorType<T> extends Type$1<T> {
   ɵfac?: unknown;
@@ -446,6 +294,5 @@ export type {
   ValueProvider,
   ValueSansProvider,
   ɵɵFactoryDeclaration,
-  ɵɵInjectableDeclaration,
   ListenerOptions
 };

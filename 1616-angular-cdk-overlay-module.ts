@@ -4,7 +4,6 @@ import {
 import {
   EnvironmentInjector
 } from './1616-angular-core';
-import * as i0 from './1616-angular-core';
 import { OnDestroy } from './1616-angular-core';
 
 declare class OverlayConfig {
@@ -23,15 +22,11 @@ declare abstract class BaseOverlayDispatcher implements OnDestroy {
   add(overlayRef: OverlayRef): void;
   remove(overlayRef: OverlayRef): void;
   protected abstract detach(): void;
-  static ɵfac: i0.ɵɵFactoryDeclaration<BaseOverlayDispatcher, never>;
-  static ɵprov: i0.ɵɵInjectableDeclaration<BaseOverlayDispatcher>;
 }
 
 declare class OverlayOutsideClickDispatcher extends BaseOverlayDispatcher {
   add(overlayRef: OverlayRef): void;
   protected detach(): void;
-  static ɵfac: i0.ɵɵFactoryDeclaration<OverlayOutsideClickDispatcher, never>;
-  static ɵprov: i0.ɵɵInjectableDeclaration<OverlayOutsideClickDispatcher>;
 }
 
 declare class OverlayRef implements PortalOutlet {

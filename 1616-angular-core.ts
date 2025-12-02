@@ -29,108 +29,33 @@ declare class InjectionToken<T> {
 
 type ProviderToken<T> = Type$1<T> | AbstractType<T> | InjectionToken<T>;
 
-interface ValueSansProvider {
-}
-
-interface ValueProvider extends ValueSansProvider {
-}
-
-interface ExistingProvider extends ExistingSansProvider {
-}
-
-interface ExistingSansProvider {
-}
-
-interface StaticClassSansProvider {
-}
-
-interface StaticClassProvider extends StaticClassSansProvider {
-}
-
-interface ConstructorSansProvider {
-}
-
-interface ConstructorProvider extends ConstructorSansProvider {
-}
-
 interface TypeProvider extends Type$1<any> {}
-interface ClassSansProvider {
-}
-
-interface ClassProvider extends ClassSansProvider {
-}
-
-interface FactorySansProvider {
-}
-
-interface FactoryProvider extends FactorySansProvider {
-}
 
 type Provider =
   | TypeProvider
-  | ValueProvider
-  | ClassProvider
-  | ConstructorProvider
-  | ExistingProvider
-  | FactoryProvider
+  | {}
   | any[];
 
 type StaticProvider =
-  | ValueProvider
-  | ExistingProvider
-  | StaticClassProvider
-  | ConstructorProvider
-  | FactoryProvider
+  | {}
   | any[];
 
-declare abstract class Injector {
-  static THROW_IF_NOT_FOUND: {};
-  static NULL: Injector;
-
-  abstract get<T>(
-    token: ProviderToken<T>,
-    notFoundValue?: T,
-  ): T;
-
-  abstract get(token: any, notFoundValue?: any): any;
-
-  static create(providers: StaticProvider[], parent?: Injector): Injector;
-
-  static create(options: {
-    providers: Array<Provider | StaticProvider>;
-    parent?: Injector;
-    name?: string;
-  }): Injector;
-
-  static ɵprov: unknown;
-}
-
 declare class ElementRef<T = any> {
-
   nativeElement: T;
   constructor(nativeElement: T);
 }
 
-declare abstract class ChangeDetectorRef {
-}
 
-declare abstract class ViewRef$1 extends ChangeDetectorRef {
-}
-
-declare abstract class EmbeddedViewRef<C> extends ViewRef$1 {
+declare abstract class EmbeddedViewRef<C> {
   abstract context: C;
   abstract get rootNodes(): any[];
 }
 
 declare abstract class TemplateRef<C> {
   abstract readonly elementRef: ElementRef;
-  abstract createEmbeddedView(
-    context: C,
-    injector?: Injector
-  ): EmbeddedViewRef<C>;
 }
 
-declare abstract class EnvironmentInjector implements Injector {
+declare abstract class EnvironmentInjector {
   abstract get<T>(
     token: ProviderToken<T>,
     notFoundValue?: T,
@@ -141,15 +66,7 @@ declare abstract class ComponentFactoryResolver$1 {
 }
 
 declare abstract class NgModuleRef$1<T> {
-  abstract get injector(): EnvironmentInjector;
-  abstract get componentFactoryResolver(): ComponentFactoryResolver$1;
-  abstract get instance(): T;
-}
 
-abstract class ViewContainerRef {
-  abstract get element(): ElementRef;
-  abstract get injector(): Injector;
-  abstract get parentInjector(): Injector;
 }
 
 declare const Type$1: FunctionConstructor;
@@ -157,69 +74,32 @@ interface Type$1<T> extends Function {
   new (...args: any[]): T;
 }
 
-type CtorDependency = {
-  attribute?: string | unknown;
-  optional?: true;
-  host?: true;
-  self?: true;
-  skipSelf?: true;
-} | null;
-
-type ɵɵFactoryDeclaration<
-  T,
-  CtorDependencies extends CtorDependency[]
-> = unknown;
-
 interface InjectorType<T> extends Type$1<T> {
   ɵfac?: unknown;
   ɵinj: unknown;
 }
 
-interface ListenerOptions {
-    capture?: boolean;
-    once?: boolean;
-    passive?: boolean;
-}
-
 declare function inject<T>(token: ProviderToken<T>): T;
 
 export {
-  ChangeDetectorRef,
   ComponentFactoryResolver$1 as ComponentFactoryResolver,
   ComponentRef$1 as ComponentRef,
   ElementRef,
   EmbeddedViewRef,
   EnvironmentInjector,
   InjectionToken,
-  Injector,
   NgModuleRef$1 as NgModuleRef,
   TemplateRef,
   Type$1 as Type,
-  ViewContainerRef,
-  ViewRef$1 as ViewRef,
   inject
 };
 export type {
   AbstractType,
-  ClassProvider,
-  ClassSansProvider,
-  ConstructorProvider,
-  ConstructorSansProvider,
-  ExistingProvider,
-  ExistingSansProvider,
-  FactoryProvider,
-  FactorySansProvider,
   InjectorType,
   OutputRef,
   OutputRefSubscription,
   Provider,
   ProviderToken,
-  StaticClassProvider,
-  StaticClassSansProvider,
   StaticProvider,
-  TypeProvider,
-  ValueProvider,
-  ValueSansProvider,
-  ɵɵFactoryDeclaration,
-  ListenerOptions
+  TypeProvider
 };

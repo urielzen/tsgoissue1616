@@ -1,7 +1,5 @@
 import {
-  Injector,
   Type,
-  ViewContainerRef,
   StaticProvider,
   ComponentRef,
   TemplateRef,
@@ -22,8 +20,8 @@ declare class DialogConfig<
   R = unknown,
   C extends DialogContainer = BasePortalOutlet
 > {
-  viewContainerRef?: ViewContainerRef;
-  injector?: Injector;
+  viewContainerRef?: {};
+  injector?: {};
   data?: D | null;
   componentFactoryResolver?: unknown;
   providers?:
@@ -68,4 +66,3 @@ declare class Dialog {
 }
 
 export { Dialog, DialogConfig, DialogRef };
-export type {};

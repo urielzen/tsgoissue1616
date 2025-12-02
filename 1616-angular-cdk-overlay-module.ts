@@ -1,14 +1,3 @@
-import {
-  b as PortalOutlet,
-} from './1616-angular-cdk-portal-directives';
-
-declare class OverlayConfig {
-  constructor(config?: OverlayConfig);
-}
-
-type ImmutableObject<T> = {
-  readonly [P in keyof T]: T[P];
-};
 declare abstract class BaseOverlayDispatcher {
   _attachedOverlays: OverlayRef[];
   protected _document: Document;
@@ -24,10 +13,9 @@ declare class OverlayOutsideClickDispatcher extends BaseOverlayDispatcher {
   protected detach(): void;
 }
 
-declare class OverlayRef implements PortalOutlet {}
+declare class OverlayRef {}
 
 export {
   OverlayRef as b,
-  OverlayConfig as g,
   OverlayOutsideClickDispatcher as p,
 };

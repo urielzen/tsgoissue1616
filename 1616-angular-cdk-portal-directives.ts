@@ -1,7 +1,5 @@
 import {
   ComponentRef,
-  ViewContainerRef,
-  Injector,
   EmbeddedViewRef,
   TemplateRef,
   ElementRef,
@@ -9,13 +7,12 @@ import {
 
 declare abstract class Portal<T> {
   private _attachedHost;
-  attach(host: PortalOutlet): T;
+  attach(host: {}): T;
   detach(): void;
   get isAttached(): boolean;
-  setAttachedHost(host: PortalOutlet | null): void;
+  setAttachedHost(host: {} | null): void;
 }
 
-interface PortalOutlet {}
 
 interface ComponentType<T> {
   new (...args: any[]): T;
@@ -23,14 +20,14 @@ interface ComponentType<T> {
 
 declare class ComponentPortal<T> extends Portal<ComponentRef<T>> {
   component: ComponentType<T>;
-  viewContainerRef?: ViewContainerRef | null;
-  injector?: Injector | null;
+  viewContainerRef?: {} | null;
+  injector?: {} | null;
   componentFactoryResolver?: any;
   projectableNodes?: Node[][] | null;
   constructor(
     component: ComponentType<T>,
-    viewContainerRef?: ViewContainerRef | null,
-    injector?: Injector | null,
+    viewContainerRef?: {} | null,
+    injector?: {} | null,
     _componentFactoryResolver?: any,
     projectableNodes?: Node[][] | null
   );
@@ -38,18 +35,18 @@ declare class ComponentPortal<T> extends Portal<ComponentRef<T>> {
 
 declare class TemplatePortal<C = any> extends Portal<EmbeddedViewRef<C>> {
   templateRef: TemplateRef<C>;
-  viewContainerRef: ViewContainerRef;
+  viewContainerRef: {};
   context?: C | undefined;
-  injector?: Injector | undefined;
+  injector?: {} | undefined;
   constructor(
     templateRef: TemplateRef<C>,
-    viewContainerRef: ViewContainerRef,
+    viewContainerRef: {},
     context?: C | undefined,
-    injector?: Injector | undefined
+    injector?: {} | undefined
   );
   get origin(): ElementRef;
 
-  attach(host: PortalOutlet, context?: C | undefined): EmbeddedViewRef<C>;
+  attach(host: {}, context?: C | undefined): EmbeddedViewRef<C>;
   detach(): void;
 }
 
@@ -58,7 +55,7 @@ declare class DomPortal<T = HTMLElement> extends Portal<T> {
   constructor(element: T | ElementRef<T>);
 }
 
-declare abstract class BasePortalOutlet implements PortalOutlet {
+declare abstract class BasePortalOutlet {
   _attachedPortal: Portal<any> | null;
   hasAttached(): boolean;
   attach<T>(portal: ComponentPortal<T>): ComponentRef<T>;
@@ -84,4 +81,4 @@ export {
   TemplatePortal as T,
   ComponentPortal as a,
 };
-export type { ComponentType as C, PortalOutlet as b };
+export type { ComponentType as C };

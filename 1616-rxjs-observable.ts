@@ -1,4 +1,4 @@
-import { SafeSubscriber, Subscriber } from "./1616-rxjs-subscriber";
+import { Subscriber } from "./1616-rxjs-subscriber";
 import { TeardownLogic } from "./1616-rxjs-types";
 import { Operator } from "./1616-rxjs-operators";
 import { Observer } from "./1616-rxjs-types";
@@ -29,6 +29,6 @@ export class Observable<T> {
     error?: ((error: any) => void) | null,
     complete?: (() => void) | null
   ): Subscription {
-    return new SafeSubscriber();
+    return {};
   }
 }

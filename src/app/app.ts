@@ -1,156 +1,38 @@
-import { Component, inject, TemplateRef } from '@angular/core';
+import { Component,inject } from '@angular/core';
 import { Dialog } from '@angular/cdk/dialog';
-import { DIALOG_DATA, DialogConfig, DialogRef } from '@angular/cdk/dialog';
+import { DialogConfig, DialogRef } from '@angular/cdk/dialog';
 import { ChangeDetectionStrategy } from '@angular/core';
 
- interface NeighborOut {
-  id: string;
-  firstName: string;
-  lastName: string;
-  email: string;
-  passwordCreated: boolean;
-  roles: string[];
-  properties: PropertyOut[];
-}
-
- interface PropertyOut {
-  lotNumber: string;
-  streetNumber: number | null;
+interface IConfirmationModal<TSubSet> {
+  subset?: TSubSet;
 }
 
 @Component({
   selector: 'app-root',
-  template: `
-  <div>
-    <button (click)="openDeleteNeighborModal(deleteNeighborModalBody)">
-      Open Modal
-    </button>
-    <ng-template #deleteNeighborModalBody>
-      Are you sure you want to delete this user?
-    </ng-template>
-  </div>
-  `,
+  template: '',
 })
 export class AppComponent {
-  readonly #dialog = inject(Dialog);
+  readonly #dialog: Dialog = null!;
 
-   openDeleteNeighborModal(
-    body: TemplateRef<void>
-  ): void {
-    const dialogConfig = getDefaultConfirmationDialogConfig<NeighborOut>({
-      title: 'Delete User',
-      body,
-      hasActionButton: true,
-      actionButtonText: 'Delete User',
-      actionButtonSeverity: 'danger',
-      dismissButtonText: 'Do Not Delete',
-      dataSubset: undefined
-    });
+  openDeleteNeighborModal(): void {
+    const dialogConfig: DialogConfig<
+      IConfirmationModal<undefined>,
+      DialogRef<undefined, ModalConfirmation<undefined>>
+    > = {
+      data: { subset: undefined },
+    };
+
     this.#dialog.open(ModalConfirmation, dialogConfig);
   }
 }
 
- interface IConfirmationModal<TSubSet> {
-  title: string;
-  maximizable: boolean;
-  hideCloseX: boolean;
-  body: TemplateRef<void>;
-  hasActionButton: boolean;
-  actionButtonText?: string;
-  actionButtonSeverity?: Severity;
-  dismissButtonText: string;
-  dismissButtonSeverity?: Severity;
-  subset?: TSubSet;
-}
-
- type Severity =
-  | 'primary'
-  | 'secondary'
-  | 'success'
-  | 'info'
-  | 'warn'
-  | 'help'
-  | 'danger'
-  | 'plain';
-
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
-  template: `
-    <div style="border: 1px solid red">
-      <div>
-        Modal content
-      </div>
-      @if(data.hasActionButton){
-        <button (click)="handleActionButtonClick()">
-        {{ data.actionButtonText }}
-        </button>
-      }
-      <button (click)="handleDismissButtonClick()">
-        {{ data.dismissButtonText }}
-      </button>
-    </div>
-  `
+  template: '',
 })
 class ModalConfirmation<TSubSet> {
-  readonly #dialogRef = inject(DialogRef<TSubSet>);
-  readonly data: IConfirmationModal<TSubSet> = inject(DIALOG_DATA);
+  readonly #dialogRef: DialogRef<TSubSet> = inject(DialogRef<TSubSet>);
 
-  handleDismissButtonClick(): void {
-    this.#dialogRef.close();
-  }
-
-  handleActionButtonClick(): void {
-    this.#dialogRef.close(this.data.subset);
-  }
+  readonly data: IConfirmationModal<TSubSet> = null!;
 }
-
-
-
- const getDefaultConfirmationDialogConfig = <TDataSubset>({
-  disableClose = true,
-  maximizable = false,
-  hideCloseX = false,
-  width,
-  title,
-  body,
-  hasActionButton,
-  actionButtonText,
-  actionButtonSeverity,
-  dismissButtonText,
-  dismissButtonSeverity,
-  dataSubset
-}: {
-  disableClose?: boolean;
-  maximizable?: boolean;
-  hideCloseX?: boolean;
-  width?: string;
-  title: string;
-  body: TemplateRef<void>;
-  hasActionButton: boolean;
-  actionButtonText?: string;
-  actionButtonSeverity?: Severity;
-  dismissButtonText: string;
-  dismissButtonSeverity?: Severity;
-  dataSubset?: TDataSubset;
-}): DialogConfig<
-  IConfirmationModal<TDataSubset>,
-  DialogRef<TDataSubset, ModalConfirmation<TDataSubset>>
-> => {
-  return {
-    disableClose,
-    width,
-    data: {
-      title,
-      maximizable,
-      hideCloseX,
-      body,
-      hasActionButton,
-      actionButtonText,
-      actionButtonSeverity,
-      dismissButtonText,
-      dismissButtonSeverity,
-      subset: dataSubset
-    }
-  };
-};

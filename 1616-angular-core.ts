@@ -13,21 +13,21 @@ interface OutputRef<T> {
   subscribe(callback: (value: T) => void): OutputRefSubscription;
 }
 
-interface EventEmitter<T> extends Subject<T>, OutputRef<T> {
-  new (isAsync?: boolean): EventEmitter<T>;
-  emit(value?: T): void;
-  subscribe(
-    next?: (value: T) => void,
-    error?: (error: any) => void,
-    complete?: () => void
-  ): Subscription;
-  subscribe(observerOrNext?: any, error?: any, complete?: any): Subscription;
-}
-declare const EventEmitter: {
-  new (isAsync?: boolean): EventEmitter<any>;
-  new <T>(isAsync?: boolean): EventEmitter<T>;
-  readonly prototype: EventEmitter<any>;
-};
+// interface EventEmitter<T> extends Subject<T>, OutputRef<T> {
+//   new (isAsync?: boolean): EventEmitter<T>;
+//   emit(value?: T): void;
+//   subscribe(
+//     next?: (value: T) => void,
+//     error?: (error: any) => void,
+//     complete?: () => void
+//   ): Subscription;
+//   subscribe(observerOrNext?: any, error?: any, complete?: any): Subscription;
+// }
+// declare const EventEmitter: {
+//   new (isAsync?: boolean): EventEmitter<any>;
+//   new <T>(isAsync?: boolean): EventEmitter<T>;
+//   readonly prototype: EventEmitter<any>;
+// };
 
 declare abstract class ComponentRef$1<C> {
   abstract setInput(name: string, value: unknown): void;
@@ -429,39 +429,6 @@ interface InjectorType<T> extends Type$1<T> {
   ɵinj: unknown;
 }
 
-declare class NgZone {
-  readonly hasPendingMacrotasks: boolean;
-  readonly hasPendingMicrotasks: boolean;
-  readonly isStable: boolean;
-  readonly onUnstable: EventEmitter<any>;
-  readonly onMicrotaskEmpty: EventEmitter<any>;
-  readonly onStable: EventEmitter<any>;
-  readonly onError: EventEmitter<any>;
-  constructor(options: {
-    enableLongStackTrace?: boolean;
-    shouldCoalesceEventChangeDetection?: boolean;
-    shouldCoalesceRunChangeDetection?: boolean;
-  });
-  static isInAngularZone(): boolean;
-  static assertInAngularZone(): void;
-  static assertNotInAngularZone(): void;
-  run<T>(fn: (...args: any[]) => T, applyThis?: any, applyArgs?: any[]): T;
-  runTask<T>(
-    fn: (...args: any[]) => T,
-    applyThis?: any,
-    applyArgs?: any[],
-    name?: string
-  ): T;
-  runGuarded<T>(
-    fn: (...args: any[]) => T,
-    applyThis?: any,
-    applyArgs?: any[]
-  ): T;
-  runOutsideAngular<T>(fn: (...args: any[]) => T): T;
-}
-
-
-
 interface ListenerOptions {
     capture?: boolean;
     once?: boolean;
@@ -504,12 +471,10 @@ export {
   ElementRef,
   EmbeddedViewRef,
   EnvironmentInjector,
-  EventEmitter,
   InjectFlags,
   InjectionToken,
   Injector,
   NgModuleRef$1 as NgModuleRef,
-  NgZone,
   TemplateRef,
   Type$1 as Type,
   ViewContainerRef,

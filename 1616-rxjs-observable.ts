@@ -5,11 +5,6 @@ import { Observer } from "./1616-rxjs-types";
 import { Subscribable } from "./1616-rxjs-types";
 import { Subscription } from "./1616-rxjs-subscription";
 
-//  interface Observable<T> {
-//     subscribe(next?: (value: T) => void): void;
-// }
-
-
 export class Observable<T> implements Subscribable<T> {
   source: Observable<any> | undefined;
   operator: Operator<any, T> | undefined;
@@ -57,5 +52,4 @@ export class Observable<T> implements Subscribable<T> {
   protected _subscribe(subscriber: Subscriber<any>): TeardownLogic {
     return this.source?.subscribe(subscriber);
   }
-
 }

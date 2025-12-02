@@ -8,7 +8,6 @@ import {
   EmbeddedViewRef,
   EnvironmentInjector,
   Injector,
-  NgZone,
 } from './1616-angular-core';
 import { Observable } from './1616-rxjs-observable';
 import * as i0 from './1616-angular-core';
@@ -52,20 +51,8 @@ declare abstract class BaseOverlayDispatcher implements OnDestroy {
   static ɵprov: i0.ɵɵInjectableDeclaration<BaseOverlayDispatcher>;
 }
 
-declare class OverlayKeyboardDispatcher extends BaseOverlayDispatcher {
-  private _ngZone;
-  private _renderer;
-  private _cleanupKeydown;
-  add(overlayRef: OverlayRef): void;
-  protected detach(): void;
-  private _keydownListener;
-  static ɵfac: i0.ɵɵFactoryDeclaration<OverlayKeyboardDispatcher, never>;
-  static ɵprov: i0.ɵɵInjectableDeclaration<OverlayKeyboardDispatcher>;
-}
-
 declare class OverlayOutsideClickDispatcher extends BaseOverlayDispatcher {
   private _platform;
-  private _ngZone;
   private _renderer;
   private _cursorOriginalValue;
   private _cursorStyleIsSet;
@@ -84,7 +71,6 @@ declare class OverlayRef implements PortalOutlet {
   private _host;
   private _pane;
   private _config;
-  private _ngZone;
   private _keyboardDispatcher;
   private _document;
   private _location;
@@ -110,8 +96,6 @@ declare class OverlayRef implements PortalOutlet {
     _host: HTMLElement,
     _pane: HTMLElement,
     _config: ImmutableObject<OverlayConfig>,
-    _ngZone: NgZone,
-    _keyboardDispatcher: OverlayKeyboardDispatcher,
     _document: Document,
     _location: Location,
     _outsideClickDispatcher: OverlayOutsideClickDispatcher,
@@ -140,7 +124,6 @@ export {
   OverlayRef as b,
   OverlayConfig as g,
   OverlayOutsideClickDispatcher as p,
-  OverlayKeyboardDispatcher as q
 };
 export type {
   OverlaySizeConfig as c,

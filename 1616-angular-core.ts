@@ -13,28 +13,6 @@ interface OutputRef<T> {
 declare abstract class ComponentRef$1<C> {
 }
 
-declare abstract class ComponentFactory$1<C> {
-  abstract get selector(): string;
-  abstract get componentType(): Type$1<any>;
-  abstract get ngContentSelectors(): string[];
-  abstract get inputs(): {
-    propName: string;
-    templateName: string;
-    transform?: (value: any) => any;
-    isSignal: boolean;
-  }[];
-  abstract get outputs(): {
-    propName: string;
-    templateName: string;
-  }[];
-  abstract create(
-    injector: Injector,
-    projectableNodes?: any[][],
-    rootSelectorOrNode?: string | any,
-    environmentInjector?: EnvironmentInjector | NgModuleRef$1<any>
-  ): ComponentRef$1<C>;
-}
-
 declare class InjectionToken<T> {
   protected _desc: string;
   readonly ɵprov: unknown;
@@ -52,60 +30,40 @@ declare class InjectionToken<T> {
 type ProviderToken<T> = Type$1<T> | AbstractType<T> | InjectionToken<T>;
 
 interface ValueSansProvider {
-  useValue: any;
 }
 
 interface ValueProvider extends ValueSansProvider {
-  provide: any;
-  multi?: boolean;
 }
 
 interface ExistingProvider extends ExistingSansProvider {
-  provide: any;
-  multi?: boolean;
 }
 
 interface ExistingSansProvider {
-  useExisting: any;
 }
 
 interface StaticClassSansProvider {
-  useClass: Type$1<any>;
-  deps: any[];
 }
 
 interface StaticClassProvider extends StaticClassSansProvider {
-  provide: any;
-  multi?: boolean;
 }
 
 interface ConstructorSansProvider {
-  deps?: any[];
 }
 
 interface ConstructorProvider extends ConstructorSansProvider {
-  provide: Type$1<any>;
-  multi?: boolean;
 }
 
 interface TypeProvider extends Type$1<any> {}
 interface ClassSansProvider {
-  useClass: Type$1<any>;
 }
 
 interface ClassProvider extends ClassSansProvider {
-  provide: any;
-  multi?: boolean;
 }
 
 interface FactorySansProvider {
-  useFactory: Function;
-  deps?: any[];
 }
 
 interface FactoryProvider extends FactorySansProvider {
-  provide: any;
-  multi?: boolean;
 }
 
 type Provider =
@@ -154,17 +112,9 @@ declare class ElementRef<T = any> {
 }
 
 declare abstract class ChangeDetectorRef {
-  abstract markForCheck(): void;
-  abstract detach(): void;
-  abstract detectChanges(): void;
-  abstract checkNoChanges(): void;
-  abstract reattach(): void;
 }
 
 declare abstract class ViewRef$1 extends ChangeDetectorRef {
-  abstract destroy(): void;
-  abstract get destroyed(): boolean;
-  abstract onDestroy(callback: Function): void;
 }
 
 declare abstract class EmbeddedViewRef<C> extends ViewRef$1 {
@@ -188,42 +138,23 @@ declare abstract class EnvironmentInjector implements Injector {
 }
 
 declare abstract class ComponentFactoryResolver$1 {
-  static NULL: ComponentFactoryResolver$1;
-
-  abstract resolveComponentFactory<T>(
-    component: Type$1<T>
-  ): ComponentFactory$1<T>;
 }
 
 declare abstract class NgModuleRef$1<T> {
-
   abstract get injector(): EnvironmentInjector;
-
   abstract get componentFactoryResolver(): ComponentFactoryResolver$1;
-
   abstract get instance(): T;
-
-  abstract destroy(): void;
-
-  abstract onDestroy(callback: () => void): void;
 }
 
 abstract class ViewContainerRef {
-
   abstract get element(): ElementRef;
-
   abstract get injector(): Injector;
-
   abstract get parentInjector(): Injector;
 }
 
 declare const Type$1: FunctionConstructor;
 interface Type$1<T> extends Function {
   new (...args: any[]): T;
-}
-
-interface OnDestroy {
-  ngOnDestroy(): void;
 }
 
 type CtorDependency = {
@@ -254,13 +185,11 @@ declare function inject<T>(token: ProviderToken<T>): T;
 
 export {
   ChangeDetectorRef,
-  ComponentFactory$1 as ComponentFactory,
   ComponentFactoryResolver$1 as ComponentFactoryResolver,
   ComponentRef$1 as ComponentRef,
   ElementRef,
   EmbeddedViewRef,
   EnvironmentInjector,
-  // InjectFlags,
   InjectionToken,
   Injector,
   NgModuleRef$1 as NgModuleRef,
@@ -268,7 +197,6 @@ export {
   Type$1 as Type,
   ViewContainerRef,
   ViewRef$1 as ViewRef,
-  ComponentFactory$1 as ɵComponentFactory,
   inject
 };
 export type {
@@ -282,7 +210,6 @@ export type {
   FactoryProvider,
   FactorySansProvider,
   InjectorType,
-  OnDestroy,
   OutputRef,
   OutputRefSubscription,
   Provider,

@@ -106,6 +106,8 @@ class ModalConfirmation<TSubSet> {
   /* In the old compiler #dialogRef type is inferred to 'DialogRef<TSubSet, unknown>'
    * In the new compiler #dialogRef type is inferred to 'DialogRef<any, any>' */
   readonly #dialogRef = inject(DialogRef<TSubSet>);
+
+  /* Adding the type explicitly would fix the issue tho */
   // readonly #dialogRef: DialogRef<TSubSet> = inject(DialogRef<TSubSet>);
 
   readonly data: IConfirmationModal<TSubSet> = null!;

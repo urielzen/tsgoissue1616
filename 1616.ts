@@ -5,12 +5,9 @@ interface AbstractType<T> extends Function {
 
 type ProviderToken<T> = Type$1<T> | AbstractType<T>;
 
-type StaticProvider =
-  | {}
-  | any[];
+type StaticProvider = {} | any[];
 
-declare class ElementRef<T = any> {
-}
+declare class ElementRef<T = any> {}
 
 declare abstract class TemplateRef<C> {
   abstract readonly elementRef: ElementRef;
@@ -24,8 +21,7 @@ interface Type$1<T> extends Function {
 declare function inject<T>(token: ProviderToken<T>): T;
 
 // mock angular cdk dialog
-declare abstract class BasePortalOutlet {
-}
+declare abstract class BasePortalOutlet {}
 
 type DialogContainer = BasePortalOutlet;
 
@@ -80,7 +76,11 @@ interface ComponentType<T> {
 // mock rxjs observable
 export class Observable<T> {
   subscribe(observerOrNext?: Partial<Observer<T>> | ((value: T) => void)): {};
-  subscribe(next?: ((value: T) => void) | null, error?: ((error: any) => void) | null, complete?: (() => void) | null): {};
+  subscribe(
+    next?: ((value: T) => void) | null,
+    error?: ((error: any) => void) | null,
+    complete?: (() => void) | null
+  ): {};
   subscribe(
     observerOrNext?: Partial<Observer<T>> | ((value: T) => void) | null,
     error?: ((error: any) => void) | null,
@@ -97,15 +97,17 @@ export class Subscriber<T> implements Observer<T> {}
 export interface Observer<T> {}
 export type TeardownLogic = {} | (() => void) | void;
 
-
 // Custom code
 interface IConfirmationModal<TSubSet> {
   subset?: TSubSet;
 }
 
 class ModalConfirmation<TSubSet> {
+  /* In the old compiler #dialogRef type is inferred to 'DialogRef<TSubSet, unknown>'
+   * In the new compiler #dialogRef type is inferred to 'DialogRef<any, any>' */
   readonly #dialogRef = inject(DialogRef<TSubSet>);
   // readonly #dialogRef: DialogRef<TSubSet> = inject(DialogRef<TSubSet>);
+
   readonly data: IConfirmationModal<TSubSet> = null!;
 }
 
@@ -125,4 +127,3 @@ class AppComponent {
     this.#dialog.open(ModalConfirmation, dialogConfig);
   }
 }
-

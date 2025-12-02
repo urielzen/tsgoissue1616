@@ -16,8 +16,6 @@ import {
 } from './1616-angular-cdk-portal-directives';
 import { Observable } from './1616-rxjs-observable';
 import {
-  P as PositionStrategy,
-  n as ScrollStrategy,
   b as OverlayRef,
 } from './1616-angular-cdk-overlay-module';
 
@@ -29,68 +27,15 @@ type DialogContainer = BasePortalOutlet & {
   _recaptureFocus?: () => void;
 };
 
-type AutoFocusTarget = 'dialog' | 'first-tabbable' | 'first-heading';
-
 declare class DialogConfig<
   D = unknown,
   R = unknown,
   C extends DialogContainer = BasePortalOutlet
 > {
-
   viewContainerRef?: ViewContainerRef;
-
   injector?: Injector;
-
-  id?: string;
-
-  role?: DialogRole;
-
-  panelClass?: string | string[];
-
-  hasBackdrop?: boolean;
-
-  backdropClass?: string | string[];
-
-  disableClose?: boolean;
-
-  width?: string;
-
-  height?: string;
-
-  minWidth?: number | string;
-
-  minHeight?: number | string;
-
-  maxWidth?: number | string;
-
-  maxHeight?: number | string;
-
-  positionStrategy?: PositionStrategy;
-
   data?: D | null;
-
-  ariaDescribedBy?: string | null;
-
-  ariaLabelledBy?: string | null;
-
-  ariaLabel?: string | null;
-
-  ariaModal?: boolean;
-
-  autoFocus?: AutoFocusTarget | string | boolean;
-
-  restoreFocus?: boolean | string | HTMLElement;
-
-  scrollStrategy?: ScrollStrategy;
-
-  closeOnNavigation?: boolean;
-
-  closeOnDestroy?: boolean;
-
-  closeOnOverlayDetachments?: boolean;
-
   componentFactoryResolver?: unknown;
-
   providers?:
     | StaticProvider[]
     | ((
@@ -98,14 +43,12 @@ declare class DialogConfig<
         config: DialogConfig<D, R, C>,
         container: C
       ) => StaticProvider[]);
-
   container?:
     | Type<C>
     | {
         type: Type<C>;
         providers: (config: DialogConfig<D, R, C>) => StaticProvider[];
       };
-
   templateContext?: Record<string, any> | (() => Record<string, any>);
 }
 
@@ -175,7 +118,6 @@ declare class Dialog /*implements OnDestroy*/ {
   closeAll(): void;
 
   getDialogById<R, C>(id: string): DialogRef<R, C> | undefined;
-
 
   private _getOverlayConfig;
 

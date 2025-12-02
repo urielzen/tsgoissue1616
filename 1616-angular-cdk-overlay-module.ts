@@ -13,21 +13,7 @@ import {
 import { Observable } from './1616-rxjs-observable';
 import * as i0 from './1616-angular-core';
 import { OnDestroy } from './1616-angular-core';
-import {
-  a as Direction,
-  D as Directionality,
-} from './1616-angular-cdk-bidi-module';
 
-interface PositionStrategy {
-  /** Attaches this position strategy to an overlay. */
-  attach(overlayRef: OverlayRef): void;
-  /** Updates the position of the overlay element. */
-  apply(): void;
-  /** Called when the overlay is detached. */
-  detach?(): void;
-  /** Cleans up any DOM modifications made by the position strategy, if necessary. */
-  dispose(): void;
-}
 
 class ComponentRef<C> {
   instance: C = null!;
@@ -35,17 +21,6 @@ class ComponentRef<C> {
   injector: Injector = null!;
   destroy(): void {}
   onDestroy(callback: Function): void {}
-}
-
-interface ScrollStrategy {
-  /** Enable this scroll strategy (called when the attached overlay is attached to a portal). */
-  enable: () => void;
-  /** Disable this scroll strategy (called when the attached overlay is detached from a portal). */
-  disable: () => void;
-  /** Attaches this `ScrollStrategy` to an overlay. */
-  attach: (overlayRef: OverlayRef) => void;
-  /** Detaches the scroll strategy from the current overlay. */
-  detach?: () => void;
 }
 
 interface OverlaySizeConfig {
@@ -60,38 +35,7 @@ interface OverlaySizeConfig {
 /** Initial configuration used when creating an overlay. */
 declare class OverlayConfig {
   /** Strategy with which to position the overlay. */
-  positionStrategy?: PositionStrategy;
   /** Strategy to be used when handling scroll events while the overlay is open. */
-  scrollStrategy?: ScrollStrategy;
-  /** Custom class to add to the overlay pane. */
-  panelClass?: string | string[];
-  /** Whether the overlay has a backdrop. */
-  hasBackdrop?: boolean;
-  /** Custom class to add to the backdrop */
-  backdropClass?: string | string[];
-  /** The width of the overlay panel. If a number is provided, pixel units are assumed. */
-  width?: number | string;
-  /** The height of the overlay panel. If a number is provided, pixel units are assumed. */
-  height?: number | string;
-  /** The min-width of the overlay panel. If a number is provided, pixel units are assumed. */
-  minWidth?: number | string;
-  /** The min-height of the overlay panel. If a number is provided, pixel units are assumed. */
-  minHeight?: number | string;
-  /** The max-width of the overlay panel. If a number is provided, pixel units are assumed. */
-  maxWidth?: number | string;
-  /** The max-height of the overlay panel. If a number is provided, pixel units are assumed. */
-  maxHeight?: number | string;
-  /**
-   * Direction of the text in the overlay panel. If a `Directionality` instance
-   * is passed in, the overlay will handle changes to its value automatically.
-   */
-  direction?: Direction | Directionality;
-  /**
-   * Whether the overlay should be disposed of when the user goes backwards/forwards in history.
-   * Note that this usually doesn't include clicking on links (unless the user is using
-   * the `HashLocationStrategy`).
-   */
-  disposeOnNavigation?: boolean;
   constructor(config?: OverlayConfig);
 }
 
@@ -232,45 +176,6 @@ declare class OverlayRef implements PortalOutlet {
   /** Updates the position of the overlay based on the position strategy. */
   updatePosition(): void;
   /** Switches to a new position strategy and updates the overlay position. */
-  updatePositionStrategy(strategy: PositionStrategy): void;
-  /** Update the size properties of the overlay. */
-  updateSize(sizeConfig: OverlaySizeConfig): void;
-  /** Sets the LTR/RTL direction for the overlay. */
-  setDirection(dir: Direction | Directionality): void;
-  /** Add a CSS class or an array of classes to the overlay pane. */
-  addPanelClass(classes: string | string[]): void;
-  /** Remove a CSS class or an array of classes from the overlay pane. */
-  removePanelClass(classes: string | string[]): void;
-  /**
-   * Returns the layout direction of the overlay panel.
-   */
-  getDirection(): Direction;
-  /** Switches to a new scroll strategy. */
-  updateScrollStrategy(strategy: ScrollStrategy): void;
-  /** Updates the text direction of the overlay panel. */
-  private _updateElementDirection;
-  /** Updates the size of the overlay element based on the overlay config. */
-  private _updateElementSize;
-  /** Toggles the pointer events for the overlay pane element. */
-  private _togglePointerEvents;
-  /** Attaches a backdrop for this overlay. */
-  private _attachBackdrop;
-  /**
-   * Updates the stacking order of the element, moving it to the top if necessary.
-   * This is required in cases where one overlay was detached, while another one,
-   * that should be behind it, was destroyed. The next time both of them are opened,
-   * the stacking will be wrong, because the detached element's pane will still be
-   * in its original DOM position.
-   */
-  private _updateStackingOrder;
-  /** Detaches the backdrop (if any) associated with the overlay. */
-  detachBackdrop(): void;
-  /** Toggles a single CSS class or an array of classes on an element. */
-  private _toggleClasses;
-  /** Detaches the overlay content next time the zone stabilizes. */
-  private _detachContentWhenEmpty;
-  /** Disposes of a scroll strategy. */
-  private _disposeScrollStrategy;
 }
 
 export {
@@ -280,7 +185,5 @@ export {
   OverlayKeyboardDispatcher as q
 };
 export type {
-  PositionStrategy as P,
   OverlaySizeConfig as c,
-  ScrollStrategy as n
 };

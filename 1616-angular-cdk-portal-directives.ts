@@ -23,14 +23,7 @@ declare abstract class Portal<T> {
 }
 
 interface PortalOutlet {
-  /** Attaches a portal to this outlet. */
-  attach(portal: Portal<any>): any;
-  /** Detaches the currently attached portal from this outlet. */
-  detach(): any;
-  /** Performs cleanup before the outlet is destroyed. */
-  dispose(): void;
-  /** Whether there is currently a portal attached to this outlet. */
-  hasAttached(): boolean;
+
 }
 
 interface ComponentType<T> {

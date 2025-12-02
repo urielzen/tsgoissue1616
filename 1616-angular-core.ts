@@ -1,5 +1,3 @@
-import { Subject } from './1616-rxjs-subject';
-import { Subscription } from './1616-rxjs-subscription';
 
 interface AbstractType<T> extends Function {
   prototype: T;
@@ -13,38 +11,7 @@ interface OutputRef<T> {
   subscribe(callback: (value: T) => void): OutputRefSubscription;
 }
 
-// interface EventEmitter<T> extends Subject<T>, OutputRef<T> {
-//   new (isAsync?: boolean): EventEmitter<T>;
-//   emit(value?: T): void;
-//   subscribe(
-//     next?: (value: T) => void,
-//     error?: (error: any) => void,
-//     complete?: () => void
-//   ): Subscription;
-//   subscribe(observerOrNext?: any, error?: any, complete?: any): Subscription;
-// }
-// declare const EventEmitter: {
-//   new (isAsync?: boolean): EventEmitter<any>;
-//   new <T>(isAsync?: boolean): EventEmitter<T>;
-//   readonly prototype: EventEmitter<any>;
-// };
-
 declare abstract class ComponentRef$1<C> {
-  abstract setInput(name: string, value: unknown): void;
-  abstract get location(): ElementRef;
-  abstract get injector(): Injector;
-
-  abstract get instance(): C;
-
-  abstract get hostView(): ViewRef$1;
-
-  abstract get changeDetectorRef(): ChangeDetectorRef;
-
-  abstract get componentType(): Type$1<any>;
-
-  abstract destroy(): void;
-
-  abstract onDestroy(callback: Function): void;
 }
 
 declare abstract class ComponentFactory$1<C> {

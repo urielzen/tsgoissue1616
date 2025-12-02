@@ -9,9 +9,6 @@ export class Observable<T> implements Subscribable<T> {
   source: Observable<any> | undefined;
   operator: Operator<any, T> | undefined;
   constructor(subscribe?: (this: Observable<T>, subscriber: Subscriber<T>) => TeardownLogic) {
-    if (subscribe) {
-      this._subscribe = subscribe;
-    }
   }
 
   // HACK: Since TypeScript inherits static properties too, we have to
@@ -33,23 +30,6 @@ export class Observable<T> implements Subscribable<T> {
     error?: ((error: any) => void) | null,
     complete?: (() => void) | null
   ): Subscription {
-    const subscriber = new SafeSubscriber(observerOrNext, error, complete);
-    return subscriber;
-  }
-
-  protected _trySubscribe(sink: Subscriber<T>): TeardownLogic {
-    try {
-      return this._subscribe(sink);
-    } catch (err) {
-      sink.error(err);
-    }
-  }
-  forEach(next: (value: T) => void): Promise<void>;
-  forEach(next: (value: T) => void, promiseCtor: PromiseConstructorLike): Promise<void>;
-  forEach(next: (value: T) => void, promiseCtor?: PromiseConstructorLike): Promise<void> {
-    return {} as Promise<void>;
-  }
-  protected _subscribe(subscriber: Subscriber<any>): TeardownLogic {
-    return this.source?.subscribe(subscriber);
+    return new SafeSubscriber();
   }
 }

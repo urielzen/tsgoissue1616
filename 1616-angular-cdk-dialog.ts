@@ -1,8 +1,6 @@
 import * as i0 from './1616-angular-core';
-import { F as FocusOrigin } from './1616-angular-cdk-focus-monitor';
 import {
   Injector,
-  OnDestroy,
   Type,
   ViewContainerRef,
   StaticProvider,
@@ -19,13 +17,7 @@ import {
   b as OverlayRef,
 } from './1616-angular-cdk-overlay-module';
 
-type DialogRole = 'dialog' | 'alertdialog';
-
-type DialogContainer = BasePortalOutlet & {
-  _focusTrapped?: Observable<void>;
-  _closeInteractionType?: FocusOrigin;
-  _recaptureFocus?: () => void;
-};
+type DialogContainer = BasePortalOutlet;
 
 declare class DialogConfig<
   D = unknown,
@@ -67,21 +59,9 @@ class DialogRef<R = unknown, C = unknown> {
   disableClose: boolean | undefined;
 
   close(result?: R): void {}
-  updatePosition(): this {
-    return this;
-  }
-  updateSize(width?: string | number, height?: string | number): this {
-    return this;
-  }
-  addPanelClass(classes: string | string[]): this {
-    return this;
-  }
-  removePanelClass(classes: string | string[]): this {
-    return this;
-  }
 }
 
-declare class Dialog /*implements OnDestroy*/ {
+declare class Dialog {
   private _overlay;
   private _injector;
   private _defaultOptions;
@@ -119,18 +99,6 @@ declare class Dialog /*implements OnDestroy*/ {
 
   getDialogById<R, C>(id: string): DialogRef<R, C> | undefined;
 
-  private _getOverlayConfig;
-
-  private _attachContainer;
-
-  private _attachDialogContent;
-
-  private _createInjector;
-
-  private _removeOpenDialog;
-
-  private _hideNonDialogContentFromAssistiveTechnology;
-  private _getAfterAllClosed;
   static ɵfac: i0.ɵɵFactoryDeclaration<Dialog, never>;
   static ɵprov: i0.ɵɵInjectableDeclaration<Dialog>;
 }

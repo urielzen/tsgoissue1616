@@ -58,20 +58,20 @@ declare class InjectionToken<T> {
 
 type ProviderToken<T> = Type$1<T> | AbstractType<T> | InjectionToken<T>;
 
-interface InjectOptions {
-  optional?: boolean;
-  skipSelf?: boolean;
-  self?: boolean;
-  host?: boolean;
-}
+// interface InjectOptions {
+//   optional?: boolean;
+//   skipSelf?: boolean;
+//   self?: boolean;
+//   host?: boolean;
+// }
 
-declare enum InjectFlags {
-  Default = 0,
-  Host = 1,
-  Self = 2,
-  SkipSelf = 4,
-  Optional = 8,
-}
+// declare enum InjectFlags {
+//   Default = 0,
+//   Host = 1,
+//   Self = 2,
+//   SkipSelf = 4,
+//   Optional = 8,
+// }
 
 interface ValueSansProvider {
 
@@ -170,30 +170,30 @@ declare abstract class Injector {
   static THROW_IF_NOT_FOUND: {};
   static NULL: Injector;
 
-  abstract get<T>(
-    token: ProviderToken<T>,
-    notFoundValue: undefined,
-    options: InjectOptions & {
-      optional?: false;
-    }
-  ): T;
+  // abstract get<T>(
+  //   token: ProviderToken<T>,
+  //   notFoundValue: undefined,
+  //   options: InjectOptions & {
+  //     optional?: false;
+  //   }
+  // ): T;
 
-  abstract get<T>(
-    token: ProviderToken<T>,
-    notFoundValue: null | undefined,
-    options: InjectOptions
-  ): T | null;
+  // abstract get<T>(
+  //   token: ProviderToken<T>,
+  //   notFoundValue: null | undefined,
+  //   options: InjectOptions
+  // ): T | null;
+
+  // abstract get<T>(
+  //   token: ProviderToken<T>,
+  //   notFoundValue?: T,
+  //   options?: InjectOptions | InjectFlags
+  // ): T;
 
   abstract get<T>(
     token: ProviderToken<T>,
     notFoundValue?: T,
-    options?: InjectOptions | InjectFlags
-  ): T;
-
-  abstract get<T>(
-    token: ProviderToken<T>,
-    notFoundValue?: T,
-    flags?: InjectFlags
+    // flags?: InjectFlags
   ): T;
 
   abstract get(token: any, notFoundValue?: any): any;
@@ -244,30 +244,30 @@ declare abstract class TemplateRef<C> {
 
 declare abstract class EnvironmentInjector implements Injector {
 
-  abstract get<T>(
-    token: ProviderToken<T>,
-    notFoundValue: undefined,
-    options: InjectOptions & {
-      optional?: false;
-    }
-  ): T;
+  // abstract get<T>(
+  //   token: ProviderToken<T>,
+  //   notFoundValue: undefined,
+  //   options: InjectOptions & {
+  //     optional?: false;
+  //   }
+  // ): T;
 
-  abstract get<T>(
-    token: ProviderToken<T>,
-    notFoundValue: null | undefined,
-    options: InjectOptions
-  ): T | null;
+  // abstract get<T>(
+  //   token: ProviderToken<T>,
+  //   notFoundValue: null | undefined,
+  //   options: InjectOptions
+  // ): T | null;
+
+  // abstract get<T>(
+  //   token: ProviderToken<T>,
+  //   notFoundValue?: T,
+  //   options?: InjectOptions
+  // ): T;
 
   abstract get<T>(
     token: ProviderToken<T>,
     notFoundValue?: T,
-    options?: InjectOptions
-  ): T;
-
-  abstract get<T>(
-    token: ProviderToken<T>,
-    notFoundValue?: T,
-    flags?: InjectFlags
+    // flags?: InjectFlags
   ): T;
 
   abstract get(token: any, notFoundValue?: any): any;
@@ -402,33 +402,7 @@ interface ListenerOptions {
     passive?: boolean;
 }
 
-
-
-
-declare enum RendererStyleFlags2 {
-    Important = 1,
-    DashCase = 2
-}
-
 declare function inject<T>(token: ProviderToken<T>): T;
-declare function inject<T>(token: ProviderToken<T>, flags?: InjectFlags): T | null;
-declare function inject<T>(token: ProviderToken<T>, options: InjectOptions & {
-    optional?: false;
-}): T;
-declare function inject<T>(token: ProviderToken<T>, options: InjectOptions): T | null;
-declare function inject(token: HostAttributeToken): string;
-declare function inject(token: HostAttributeToken, options: {
-    optional: true;
-}): string | null;
-declare function inject(token: HostAttributeToken, options: {
-    optional: false;
-}): string;
-
-declare class HostAttributeToken {
-    private attributeName;
-    constructor(attributeName: string);
-    toString(): string;
-}
 
 export {
   ChangeDetectorRef,
@@ -438,7 +412,7 @@ export {
   ElementRef,
   EmbeddedViewRef,
   EnvironmentInjector,
-  InjectFlags,
+  // InjectFlags,
   InjectionToken,
   Injector,
   NgModuleRef$1 as NgModuleRef,
@@ -447,7 +421,6 @@ export {
   ViewContainerRef,
   ViewRef$1 as ViewRef,
   ComponentFactory$1 as ɵComponentFactory,
-  RendererStyleFlags2,
   inject
 };
 export type {
@@ -460,7 +433,6 @@ export type {
   ExistingSansProvider,
   FactoryProvider,
   FactorySansProvider,
-  InjectOptions,
   InjectorType,
   OnDestroy,
   OutputRef,

@@ -11,8 +11,6 @@ export class Subscription implements SubscriptionLike {
 
   private _parentage: Subscription[] | Subscription | null = null;
 
-  private _finalizers: Exclude<TeardownLogic, void>[] | null = null;
-
   constructor(private initialTeardown?: () => void) {}
 
   unsubscribe(): void {}

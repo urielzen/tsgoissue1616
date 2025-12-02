@@ -24,9 +24,6 @@ class AppComponent {
       },
     };
 
-    // This should work in old compiler (C inferred as NeighborOut)
-    // And fail in new compiler (C inferred as unknown -> providers mismatch)
-    // We force the types here to reproduce the inference result seen in the full app
     this.#dialog.open(ModalConfirmation, dialogConfig);
   }
 }

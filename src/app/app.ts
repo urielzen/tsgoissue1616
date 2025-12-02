@@ -8,6 +8,17 @@ interface IConfirmationModal<TSubSet> {
 }
 
 @Component({
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  template: '',
+})
+class ModalConfirmation<TSubSet> {
+  readonly #dialogRef = inject(DialogRef<TSubSet>);
+  // readonly #dialogRef: DialogRef<TSubSet> = inject(DialogRef<TSubSet>);
+
+  readonly data: IConfirmationModal<TSubSet> = null!;
+}
+
+@Component({
   selector: 'app-root',
   template: '',
 })
@@ -26,13 +37,3 @@ export class AppComponent {
   }
 }
 
-
-@Component({
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  template: '',
-})
-class ModalConfirmation<TSubSet> {
-  readonly #dialogRef: DialogRef<TSubSet> = inject(DialogRef<TSubSet>);
-
-  readonly data: IConfirmationModal<TSubSet> = null!;
-}

@@ -32,7 +32,7 @@ export class AppComponent {
   template: '',
 })
 class ModalConfirmation<TSubSet> {
-  readonly #dialogRef: DialogRef<TSubSet> = inject(DialogRef<TSubSet>);
-
+  // readonly #dialogRef: DialogRef<TSubSet> = inject(DialogRef<TSubSet>);
+  readonly #dialogRef = inject(DialogRef<TSubSet>);
   readonly data: IConfirmationModal<TSubSet> = null!;
 }

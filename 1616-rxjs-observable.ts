@@ -2,10 +2,9 @@ import { SafeSubscriber, Subscriber } from "./1616-rxjs-subscriber";
 import { TeardownLogic } from "./1616-rxjs-types";
 import { Operator } from "./1616-rxjs-operators";
 import { Observer } from "./1616-rxjs-types";
-import { Subscribable } from "./1616-rxjs-types";
 import { Subscription } from "./1616-rxjs-subscription";
 
-export class Observable<T> implements Subscribable<T> {
+export class Observable<T> {
   source: Observable<any> | undefined;
   operator: Operator<any, T> | undefined;
   constructor(subscribe?: (this: Observable<T>, subscriber: Subscriber<T>) => TeardownLogic) {
